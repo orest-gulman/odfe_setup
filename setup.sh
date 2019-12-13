@@ -9,3 +9,5 @@
 
   echo $kibana_pass
   echo $elasticseach_pass
+  
+  #sed -i -e 's/abc/XYZ/g' file.txt
