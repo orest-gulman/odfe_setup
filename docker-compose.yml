@@ -3,6 +3,7 @@ services:
   odfe-node1:
     image: amazon/opendistro-for-elasticsearch:1.2.1
     container_name: odfe-node1
+    restart: always
     environment:
       - node.name=odfe-node1
       - discovery.type=single-node
@@ -35,6 +36,7 @@ services:
   kibana:
     image: amazon/opendistro-for-elasticsearch-kibana:1.2.1
     container_name: odfe-kibana
+    restart: always
     ports:
       - 5601:5601
     expose:
