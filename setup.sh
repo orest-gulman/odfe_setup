@@ -25,7 +25,7 @@
   sed -i -e "s/replacehash/$hash/g" internal_users.yml
   sleep 2
   
-  echo -e "${col}Removing temporary elasticsearch container!${nocol}"
+  echo "${col}Removing temporary elasticsearch container!${nocol}"
   docker rm hash -f
   sleep 2
   
