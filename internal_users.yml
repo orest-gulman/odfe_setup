@@ -20,5 +20,3 @@ admin:
   backend_roles:
   - "admin"
   description: "Demo admin user"
-
-
