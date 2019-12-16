@@ -8,6 +8,7 @@
   sleep 2
   
   echo "${col}Installing docker-compose... ${nocol}"
+  sleep 2
   apt-get install docker-compose -y
   sleep 2
 
