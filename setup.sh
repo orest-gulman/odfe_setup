@@ -16,13 +16,14 @@
   
   echo "${col}Running temp elasticsearch container for generating bcrypt hashes${nocol}"
   docker run -d --name hash  -e "ES_JAVA_OPTS=-Xms4096m -Xmx4096m" -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.2.1
-  sleep 10
+  sleep 2
   
   hash=$(docker exec -it hash /bin/bash -c "chmod 755 plugins/opendistro_security/tools/hash.sh; plugins/opendistro_security/tools/hash.sh -p $admin_pass")
   echo "${col}Generated hash for admin password: $hash${nocol}"
   sleep 2
   
-  sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
+  #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
+  echo "  hash: "${hash}"" >> internal_users.yml
   sleep 2
   
   echo "${col}Removing temporary elasticsearch container!${nocol}"
