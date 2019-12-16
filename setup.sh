@@ -22,7 +22,7 @@
   echo "${col}Generated hash for admin password: $hash${nocol}"
   sleep 2
   
-  sed -i -e "s/replacehash/$hash/g" internal_users.yml
+  sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
   sleep 2
   
   echo "${col}Removing temporary elasticsearch container!${nocol}"
@@ -35,12 +35,11 @@
   
   docker ps
   valhost=$(hostname)
-  echo "${col}kibana is running http://$valhost:5601${nocol}"
-  echo "${col}elasticsearch is running http://$valhost:9200${nocol}"
+  echo "${col}Kibana is running http://$valhost:5601${nocol}"
+  echo "${col}Elasticsearch is running http://$valhost:9200${nocol}"
   echo "${col}admin password: $admin_pass${nocol}"
   
-  
   echo "${col}Waitiong for elasticsearch and kibana up and running!${nocol}"
-  sleep 60
+  sleep 120
   echo "${col}Importing savad data for metricbeats!${nocol}"
   curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass}
