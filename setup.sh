@@ -21,14 +21,18 @@
   hash=$(docker exec -it hash /bin/bash -c "chmod 755 plugins/opendistro_security/tools/hash.sh; plugins/opendistro_security/tools/hash.sh -p $admin_pass")
   echo -e "${col}Generated hash for admin password: $hash${nocol}"
   sleep 2
+  
   sed -i -e "s/replacehash/$hash/g" internal_users.yml
   sleep 2
+  
   echo -e "${col}Removing temporary elasticsearch container!${nocol}"
   docker rm hash -f
   sleep 2
+  
   echo -e "${col}Running elasticsearch and kibana containers${nocol}"
   docker-compose up -d
   sleep 2
+  
   docker ps
   valhost=$(hostname)
   echo -e "${col}kibana is running http://$valhost:5601${nocol}"
