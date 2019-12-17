@@ -22,11 +22,22 @@ sleep 2
 apt install ruby -y
 sleep 1
 
+echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
+sleep 2
+kibanaserver_pass=$(openssl rand -base64 10)
+echo $kibanaserver_pass
+echo -e "${cyan}Generating hash for kibanaserver user...${nocol}"
+sleep 2
+kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
+echo $kibanaserver_hash
+
 echo -e "${cyan}Enter admin password for elasticsearch and kibana ${nocol}"
 read -p ": " admin_pass
 
+echo -e "${cyan}Generating hash for admin user...${nocol}"
+sleep 2
 admin_hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
-echo -e "${cyan}Generated hash for admin password: $hash${nocol}"
+echo $admin_hash
   
 #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
 echo "  hash: "${admin_hash}"" >> internal_users.yml
