@@ -92,6 +92,8 @@ for ((n=0;n<20;n++))
         break
     fi
 done
-  
+
+clear
+
 #echo "${cyan}Importing savad data for metricbeats!${nocol}"
 #curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass} -w "\n"
