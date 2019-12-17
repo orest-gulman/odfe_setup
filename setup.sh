@@ -51,5 +51,5 @@
   
   echo "${col}Waitiong for elasticsearch and kibana up and running!${nocol}"
   sleep 120
-  echo "${col}Importing savad data for metricbeats!${nocol}"
-  curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics2.ndjson -u admin:${admin_pass} -w "\n"
+  #echo "${col}Importing savad data for metricbeats!${nocol}"
+  #curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass} -w "\n"
