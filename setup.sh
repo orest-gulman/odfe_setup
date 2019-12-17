@@ -41,16 +41,18 @@ sleep 2
   
 echo -e "${col}Running elasticsearch and kibana containers${nocol}"
 docker-compose up -d
-sleep 2
   
+echo -e "${col}Waiting 60sec...${nocol}"
+sleep 60
 docker ps
+
+#docker inspect -f '{{.State.Running}}' odfe-node1
+#docker inspect -f '{{.State.Running}}' odfe-kibana
+  
 valhost=$(hostname)
 echo -e "${col}Kibana started http://$valhost:5601${nocol}"
 echo -e "${col}Elasticsearch started http://$valhost:9200${nocol}"
 echo -e "${col}admin password: $admin_pass${nocol}"
-  
-echo -e "${col}Waiting 60sec...${nocol}"
-sleep 60
 
 echo -e "${col}Checking kibana status...${nocol}"
 sleep 2
