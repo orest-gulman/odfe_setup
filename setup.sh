@@ -2,22 +2,22 @@
 col='\033[0;36m' # Cyan
 nocol='\033[0m' # No Color
   
-echo "${col}Installing docker... ${nocol}"
+echo -e "${col}Installing docker... ${nocol}"
 sleep 2
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 sleep 1
   
-echo "${col}Installing docker-compose... ${nocol}"
+echo -e "${col}Installing docker-compose... ${nocol}"
 sleep 2
 apt install docker-compose -y
 sleep 1
-echo "${col}Installing apache2-utils... ${nocol}"
+echo -e "${col}Installing apache2-utils... ${nocol}"
 sleep 2
 apt install apache2-utils -y
 sleep 1
 
-echo "${col}Enter admin password for elasticsearch and kibana ${nocol}"
+echo -e "${col}Enter admin password for elasticsearch and kibana ${nocol}"
 read -p ": " admin_pass
   
 #echo "${col}Running temp elasticsearch container for generating bcrypt hashes${nocol}"
@@ -29,7 +29,7 @@ read -p ": " admin_pass
 #sleep 2
   
 hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
-echo "${col}Generated hash for admin password: $hash${nocol}"
+echo -e "${col}Generated hash for admin password: $hash${nocol}"
   
 #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
 echo "  hash: "${hash}"" >> internal_users.yml
@@ -39,20 +39,20 @@ sleep 2
 #docker rm hash -f
 #sleep 2
   
-echo "${col}Running elasticsearch and kibana containers${nocol}"
+echo -e "${col}Running elasticsearch and kibana containers${nocol}"
 docker-compose up -d
 sleep 2
   
 docker ps
 valhost=$(hostname)
-echo "${col}Kibana started http://$valhost:5601${nocol}"
-echo "${col}Elasticsearch started http://$valhost:9200${nocol}"
-echo "${col}admin password: $admin_pass${nocol}"
+echo -e "${col}Kibana started http://$valhost:5601${nocol}"
+echo -e "${col}Elasticsearch started http://$valhost:9200${nocol}"
+echo -e "${col}admin password: $admin_pass${nocol}"
   
-echo "${col}Waiting 60sec...${nocol}"
+echo -e "${col}Waiting 60sec...${nocol}"
 sleep 60
 
-echo "${col}Checking kibana status...${nocol}"
+echo -e "${col}Checking kibana status...${nocol}"
 sleep 2
 
 for ((n=0;n<20;n++))
@@ -64,8 +64,8 @@ for ((n=0;n<20;n++))
         echo $response
         sleep 10
     else
-        echo "${col}Kibana up...${nocol}" 
-        echo ${code[1]}
+        echo -e "${col}Kibana up...${nocol}" 
+        echo -e ${code[1]}
         break
     fi
 done
