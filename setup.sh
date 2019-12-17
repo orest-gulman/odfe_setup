@@ -50,6 +50,9 @@
   echo "${col}admin password: $admin_pass${nocol}"
   
   echo "${col}Waiting for elasticsearch and kibana up and running!${nocol}"
+  
+  #curl -s -XGET http://localhost:5601/status -I -u admin:admin|grep "HTTP/1.1"
+  
   sleep 120
   #echo "${col}Importing savad data for metricbeats!${nocol}"
   #curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass} -w "\n"
