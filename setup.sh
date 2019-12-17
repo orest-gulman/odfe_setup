@@ -49,7 +49,7 @@
   echo "${col}Elasticsearch is running http://$valhost:9200${nocol}"
   echo "${col}admin password: $admin_pass${nocol}"
   
-  echo "${col}Waitiong for elasticsearch and kibana up and running!${nocol}"
+  echo "${col}Waiting for elasticsearch and kibana up and running!${nocol}"
   sleep 120
   #echo "${col}Importing savad data for metricbeats!${nocol}"
   #curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass} -w "\n"
