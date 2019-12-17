@@ -3,33 +3,40 @@
   nocol='\033[0m' # No Color
   
   echo "${col}Installing docker... ${nocol}"
+  sleep 2
   curl -fsSL https://get.docker.com -o get-docker.sh
   sh get-docker.sh
-  sleep 2
+  sleep 1
   
   echo "${col}Installing docker-compose... ${nocol}"
   sleep 2
-  apt-get install docker-compose -y
+  apt install docker-compose -y
+  sleep 1
+  echo "${col}Installing apache2-utils... ${nocol}"
   sleep 2
+  apt install apache2-utils -y
+  sleep 1
 
   echo "${col}Enter admin password for elasticsearch and kibana ${nocol}"
   read -p ": " admin_pass
   
-  echo "${col}Running temp elasticsearch container for generating bcrypt hashes${nocol}"
-  docker run -d --name hash  -e "ES_JAVA_OPTS=-Xms4096m -Xmx4096m" -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.2.1
-  sleep 2
+  #echo "${col}Running temp elasticsearch container for generating bcrypt hashes${nocol}"
+  #docker run -d --name hash  -e "ES_JAVA_OPTS=-Xms4096m -Xmx4096m" -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.2.1
+  #sleep 2
   
-  hash=$(docker exec -it hash /bin/bash -c "chmod 755 plugins/opendistro_security/tools/hash.sh; plugins/opendistro_security/tools/hash.sh -p $admin_pass")
+  #hash=$(docker exec -it hash /bin/bash -c "chmod 755 plugins/opendistro_security/tools/hash.sh; plugins/opendistro_security/tools/hash.sh -p $admin_pass")
+  #echo "${col}Generated hash for admin password: $hash${nocol}"
+  #sleep 2
+  
   echo "${col}Generated hash for admin password: $hash${nocol}"
-  sleep 2
-  
+  hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
   #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
   echo "  hash: "${hash}"" >> internal_users.yml
   sleep 2
   
-  echo "${col}Removing temporary elasticsearch container!${nocol}"
-  docker rm hash -f
-  sleep 2
+  #echo "${col}Removing temporary elasticsearch container!${nocol}"
+  #docker rm hash -f
+  #sleep 2
   
   echo "${col}Running elasticsearch and kibana containers${nocol}"
   docker-compose up -d
