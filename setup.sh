@@ -66,8 +66,11 @@ for ((n=0;n<20;n++))
         echo $response
         sleep 10
     else
-        echo -e "${col}Kibana up...${nocol}" 
-        echo -e ${code[1]}
+        echo -e "${col}Kibana up...${nocol}"
+        sleep 2
+        echo -e "${col}Importing saved data for metricbeats...${nocol}"
+        curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@import-metrics.ndjson -u admin:${admin_pass} -w "\n"
+        #echo -e ${code[1]}
         break
     fi
 done
