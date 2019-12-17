@@ -15,5 +15,6 @@ kibanaserver:
   
 admin:
   reserved: true
-  backend_roles: "admin"
+  backend_roles: 
+  - admin
   description: "admin user"
