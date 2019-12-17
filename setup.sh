@@ -76,7 +76,7 @@ for ((n=0;n<20;n++))
         curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@import-metrics.ndjson -u admin:${admin_pass} -w "\n"
         echo -e "${cyan}Importing Advanced Settings [7.2.1]...${nocol}"	
         sleep 2
-        #curl -X POST "localhost:5601/api/saved_objects/_resolve_import_errors" -H "kbn-xsrf: true" --form file=@import-settings.ndjson --form retries='[{"type":"config","id":"7.2.1","overwrite":true}]' -u admin:${admin_pass} -w "\n"
+        curl -X POST "localhost:5601/api/saved_objects/_resolve_import_errors" -H "kbn-xsrf: true" --form file=@import-settings.ndjson --form retries='[{"type":"config","id":"7.2.1","overwrite":true}]' -u admin:${admin_pass} -w "\n"
         #echo -e ${code[1]}
         break
     fi
