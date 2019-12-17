@@ -11,7 +11,7 @@ _meta:
 ## Demo users
 
 kibanaserver:
-  hash: "$2a$12$4AcgAt3xwOWadA5s5blL6ev39OXDNhmOesEoo33eZtrq2N0YrU3H."
+  hash: "$2y$10$ZRrpDKGLs3kHcesZs0CgCexplVBw8E/tVcXe9iSpzSqkr0WZWi9.m"
   reserved: true
   description: "Demo kibanaserver user"
   
