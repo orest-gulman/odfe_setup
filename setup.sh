@@ -28,8 +28,9 @@
   #echo "${col}Generated hash for admin password: $hash${nocol}"
   #sleep 2
   
-  echo "${col}Generated hash for admin password: $hash${nocol}"
   hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
+  echo "${col}Generated hash for admin password: $hash${nocol}"
+  
   #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
   echo "  hash: "${hash}"" >> internal_users.yml
   sleep 2
