@@ -17,28 +17,20 @@ echo -e "${cyan}Installing apache2-utils... ${nocol}"
 sleep 2
 apt install apache2-utils -y
 sleep 1
+echo -e "${cyan}Installing ruby... ${nocol}"
+sleep 2
+apt install ruby -y
+sleep 1
 
 echo -e "${cyan}Enter admin password for elasticsearch and kibana ${nocol}"
 read -p ": " admin_pass
-  
-#echo "${cyan}Running temp elasticsearch container for generating bcrypt hashes${nocol}"
-#docker run -d --name hash  -e "ES_JAVA_OPTS=-Xms4096m -Xmx4096m" -e "discovery.type=single-node" amazon/opendistro-for-elasticsearch:1.2.1
-#sleep 2
-  
-#hash=$(docker exec -it hash /bin/bash -c "chmod 755 plugins/opendistro_security/tools/hash.sh; plugins/opendistro_security/tools/hash.sh -p $admin_pass")
-#echo "${cyan}Generated hash for admin password: $hash${nocol}"
-#sleep 2
-  
-hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
+
+admin_hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
 echo -e "${cyan}Generated hash for admin password: $hash${nocol}"
   
 #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
-echo "  hash: "${hash}"" >> internal_users.yml
+echo "  hash: "${admin_hash}"" >> internal_users.yml
 sleep 2
-  
-#echo "${cyan}Removing temporary elasticsearch container!${nocol}"
-#docker rm hash -f
-#sleep 2
   
 echo -e "${cyan}Running elasticsearch and kibana containers${nocol}"
 docker-compose up -d
