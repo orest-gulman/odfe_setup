@@ -47,7 +47,7 @@ services:
       ELASTICSEARCH_HOSTS: http://odfe-node1:9200
       SERVER_SSL_ENABLED: "false"
     volumes:
-      - ./custom-kibana.yml:/usr/share/kibana/config/kibana.yml
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
     networks:
       - odfe-net
       
