@@ -5,7 +5,7 @@ nocol='\033[0m'
 
 if ! [ $NAME == Ubuntqu ]
   then
-   echo -e "${red}Script is't compatible with current operation system ${NAME}!...exit${nocol}"
+   echo -e "${red}Script isn't compatible with current Linux distribution!...exit${nocol}"
    exit 1
   else
     continue
