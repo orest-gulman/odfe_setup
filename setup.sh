@@ -3,7 +3,9 @@ cyan='\033[0;36m'
 red='\033[0;31m'
 nocol='\033[0m'
 
-if ! [ $NAME == Ubuntu ]
+  distro=$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')
+
+if ! [ $distro == ubuntuq ]
   then
    echo -e "${red}Script isn't compatible with current Linux distribution!...exit${nocol}"
    exit 1
