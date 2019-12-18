@@ -5,59 +5,53 @@ nocol='\033[0m'
   
 echo -e "${cyan}Installing docker... ${nocol}"
 sleep 2
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
+  curl -fsSL https://get.docker.com -o get-docker.sh
+  sh get-docker.sh
 sleep 1
   
 echo -e "${cyan}Installing docker-compose... ${nocol}"
 sleep 2
-apt install docker-compose -y
+  apt install docker-compose -y
 sleep 1
 echo -e "${cyan}Installing apache2-utils... ${nocol}"
 sleep 2
-apt install apache2-utils -y
+  apt install apache2-utils -y
 sleep 1
 echo -e "${cyan}Installing ruby... ${nocol}"
 sleep 2
-apt install ruby -y
+  apt install ruby -y
 sleep 1
 
 echo -e "${cyan}Enter admin user password...${nocol}"
-read -p ": " admin_pass
+  read -p ": " admin_pass
 
 echo -e "${cyan}Generating bcrypt hash for admin user...${nocol}"
 sleep 2
-admin_hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
+  admin_hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
 echo $admin_hash
 
 echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
 sleep 2
-kibanaserver_pass=$(openssl rand -base64 10)
+  kibanaserver_pass=$(openssl rand -base64 10)
 echo $kibanaserver_pass
-#sed -i -e "s/kibanaserver_pass/"$kibanaserver_pass"/g" custom-kibana.yml
 echo -e "${cyan}Generating bcrypt hash for kibanaserver user...${nocol}"
 sleep 2
-kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
+  kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
 echo $kibanaserver_hash
   
-#sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
-#echo "  hash: "${admin_hash}"" >> internal_users.yml
-#sleep 2
-
 echo -e "${cyan}Applying configuration...${nocol}"
 sleep 2
-ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "kibanaserver_pass"
+  ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$kibanaserver_pass"
 echo -e "${cyan}internal_users.yml${nocol}"
-cat internal_users.yml
+  cat internal_users.yml
 sleep 2
 echo -e "${cyan}kibana.yml${nocol}"
-cat kibana.yml
+  cat kibana.yml
 sleep 2
 
-  
 echo -e "${cyan}Running elasticsearch and kibana containers...${nocol}"
 sleep 2
-docker-compose up -d
+  docker-compose up -d
   
 echo -e "${cyan}Waiting 90sec...${nocol}"
 sleep 90
@@ -108,13 +102,10 @@ if [ $n == 20 ]
    exit 1
 fi  
   
-valhost=$(hostname)
+  valhost=$(hostname)
+
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
 echo -e "${cyan}Elasticsearch is running http://$valhost:9200${nocol}"
 echo -e "${cyan}admin user password: $admin_pass${nocol}"
 echo -e "${cyan}kibanaserver user password: $kibanaserver_pass${nocol}"
-
-#clear
-
-#echo "${cyan}Importing savad data for metricbeats!${nocol}"
-#curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@metrics.ndjson -u admin:${admin_pass} -w "\n"
+echo -e "${cyan}elasticsearch user password: $kibanaserver_pass${nocol}"
