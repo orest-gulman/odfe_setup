@@ -7,7 +7,7 @@ OS=$(bash os.sh)
 
 if ! [ $OS == Ubuntqu ]
   then
-   echo -e "${red}Script is't compatible with operation system $OS!...exit${nocol}"
+   echo -e "${red}Script is't compatible with operation system ${OS}!...exit${nocol}"
    exit 1
   else
     continue
