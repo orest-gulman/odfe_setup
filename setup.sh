@@ -2,12 +2,10 @@
 cyan='\033[0;36m'
 red='\033[0;31m'
 nocol='\033[0m'
-  
-OS=$(bash os.sh)
 
-if ! [ $OS == Ubuntqu ]
+if ! [ $NAME == Ubuntqu ]
   then
-   echo -e "${red}Script is't compatible with operation system ${OS}!...exit${nocol}"
+   echo -e "${red}Script is't compatible with current operation system ${NAME}!...exit${nocol}"
    exit 1
   else
     continue
