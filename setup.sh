@@ -43,6 +43,8 @@ echo $kibanaserver_hash
 #sed -i -e "s/replacehash/"$hash"/g" internal_users.yml
 #echo "  hash: "${admin_hash}"" >> internal_users.yml
 #sleep 2
+
+ruby ./hashes.rb "$admin_hash" "$kibanaserver_hash"
   
 echo -e "${cyan}Running elasticsearch and kibana containers${nocol}"
 sleep 2
