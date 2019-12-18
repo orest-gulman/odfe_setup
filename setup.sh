@@ -34,7 +34,7 @@ echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_pass=$(openssl rand -base64 10)
 echo $kibanaserver_pass
-sed -i -e "s/kibanaserver_pass/"$kibanaserver_pass"/g" custom-kibana.yml
+#sed -i -e "s/kibanaserver_pass/"$kibanaserver_pass"/g" custom-kibana.yml
 echo -e "${cyan}Generating bcrypt hash for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
@@ -44,7 +44,9 @@ echo $kibanaserver_hash
 #echo "  hash: "${admin_hash}"" >> internal_users.yml
 #sleep 2
 
-ruby ./hashes.rb "$admin_hash" "$kibanaserver_hash"
+echo -e "${cyan}Applying configuration...${nocol}"
+sleep 2
+ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$kibanaserver_pass"
   
 echo -e "${cyan}Running elasticsearch and kibana containers${nocol}"
 sleep 2
@@ -92,6 +94,12 @@ for ((n=0;n<20;n++))
         break
     fi
 done
+
+if [ n == 20 ]
+  then
+   echo -e "${red}Can't connect to kibana!...exit${nocol}"
+   exit 1
+fi  
   
 valhost=$(hostname)
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
