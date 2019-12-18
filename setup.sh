@@ -46,10 +46,12 @@ echo $kibanaserver_hash
 
 echo -e "${cyan}Applying configuration...${nocol}"
 sleep 2
-  ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "kibanaserver_pass"
-  cat internal_users.yml
+ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "kibanaserver_pass"
+echo -e "${cyan}internal_users.yml${nocol}"
+cat internal_users.yml
 sleep 2
-  cat kibana.yml
+echo -e "${cyan}kibana.yml${nocol}"
+cat kibana.yml
 sleep 2
 
   
@@ -101,8 +103,8 @@ done
 
 if [ $n == 20 ]
   then
-   echo -e "${red}Can't connect to kibana!...exit${nocol}"
-   docker logs odfe-kibana --tail 5
+   echo -e "${red}Tries exceeded...exit${nocol}"
+   docker logs odfe-node1 --tail 5
    exit 1
 fi  
   
