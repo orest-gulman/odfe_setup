@@ -34,7 +34,7 @@ echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_pass=$(openssl rand -base64 10)
 echo $kibanaserver_pass
-sed -i -e "s/password/"$kibanaserver_pass"/g" custom-kibana.yml
+sed -i -e "s/kibanaserver_pass/"$kibanaserver_pass"/g" custom-kibana.yml
 echo -e "${cyan}Generating bcrypt hash for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
