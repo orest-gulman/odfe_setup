@@ -46,7 +46,12 @@ echo $kibanaserver_hash
 
 echo -e "${cyan}Applying configuration...${nocol}"
 sleep 2
-ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$kibanaserver_pass"
+  ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "kibanaserver_pass"
+  cat internal_users.yml
+sleep 2
+  cat kibana.yml
+sleep 2
+
   
 echo -e "${cyan}Running elasticsearch and kibana containers...${nocol}"
 sleep 2
@@ -90,16 +95,15 @@ for ((n=0;n<20;n++))
         echo -e "${cyan}Importing Advanced Settings [7.3.2]...${nocol}"	
         sleep 2
         curl -X POST "localhost:5601/api/saved_objects/_resolve_import_errors" -H "kbn-xsrf: true" --form file=@import-settings.ndjson --form retries='[{"type":"config","id":"7.3.2","overwrite":true}]' -u admin:${admin_pass} -w "\n"
-        #echo -e ${code[1]}
         break
     fi
 done
 
-#if [ n == 20 ]
-#  then
-#   echo -e "${red}Can't connect to kibana!...exit${nocol}"
-#   exit 1
-#fi  
+if [ $n == 20 ]
+  then
+   echo -e "${red}Can't connect to kibana!...exit${nocol}"
+   exit 1
+fi  
   
 valhost=$(hostname)
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
