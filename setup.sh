@@ -34,6 +34,7 @@ echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_pass=$(openssl rand -base64 10)
 echo $kibanaserver_pass
+sed -i -e "s/password/"$kibanaserver_pass"/g" custom-kibana.yml
 echo -e "${cyan}Generating bcrypt hash for kibanaserver user...${nocol}"
 sleep 2
 kibanaserver_hash=$(htpasswd -bnBC 10 "" $kibanaserver_pass | tr -d ':\n')
@@ -44,6 +45,7 @@ echo $kibanaserver_hash
 #sleep 2
   
 echo -e "${cyan}Running elasticsearch and kibana containers${nocol}"
+sleep 2
 docker-compose up -d
   
 echo -e "${cyan}Waiting 90sec...${nocol}"
