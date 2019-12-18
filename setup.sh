@@ -3,7 +3,7 @@ cyan='\033[0;36m'
 red='\033[0;31m'
 nocol='\033[0m'
 
-if ! [ $NAME == Ubuntqu ]
+if ! [ $NAME == Ubuntu ]
   then
    echo -e "${red}Script isn't compatible with current Linux distribution!...exit${nocol}"
    exit 1
