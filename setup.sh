@@ -3,6 +3,16 @@ cyan='\033[0;36m'
 red='\033[0;31m'
 nocol='\033[0m'
   
+OS=$(bash os.sh)
+
+if ! [ $OS == Ubuntqu ]
+  then
+   echo -e "${red}Script is't compatible with operation system $OS!...exit${nocol}"
+   exit 1
+  else
+    continue
+fi
+
 echo -e "${cyan}Installing docker... ${nocol}"
 sleep 2
   curl -fsSL https://get.docker.com -o get-docker.sh
