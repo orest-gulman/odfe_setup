@@ -102,6 +102,7 @@ done
 if [ $n == 20 ]
   then
    echo -e "${red}Can't connect to kibana!...exit${nocol}"
+   docker logs odfe-kibana --tail 5
    exit 1
 fi  
   
