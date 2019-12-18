@@ -22,7 +22,7 @@ sleep 2
 apt install ruby -y
 sleep 1
 
-echo -e "${cyan}Enter admin user password${nocol}"
+echo -e "${cyan}Enter admin user password...${nocol}"
 read -p ": " admin_pass
 
 echo -e "${cyan}Generating bcrypt hash for admin user...${nocol}"
@@ -48,7 +48,7 @@ echo -e "${cyan}Applying configuration...${nocol}"
 sleep 2
 ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$kibanaserver_pass"
   
-echo -e "${cyan}Running elasticsearch and kibana containers${nocol}"
+echo -e "${cyan}Running elasticsearch and kibana containers...${nocol}"
 sleep 2
 docker-compose up -d
   
@@ -95,17 +95,18 @@ for ((n=0;n<20;n++))
     fi
 done
 
-if [ n == 20 ]
-  then
-   echo -e "${red}Can't connect to kibana!...exit${nocol}"
-   exit 1
-fi  
+#if [ n == 20 ]
+#  then
+#   echo -e "${red}Can't connect to kibana!...exit${nocol}"
+#   exit 1
+#fi  
   
 valhost=$(hostname)
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
 echo -e "${cyan}Elasticsearch is running http://$valhost:9200${nocol}"
 echo -e "${cyan}admin user password: $admin_pass${nocol}"
 echo -e "${cyan}kibanaserver user password: $kibanaserver_pass${nocol}"
+
 #clear
 
 #echo "${cyan}Importing savad data for metricbeats!${nocol}"
