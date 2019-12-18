@@ -5,7 +5,7 @@ nocol='\033[0m'
 
   distro=$(awk '/^ID=/' /etc/*-release | awk -F'=' '{ print tolower($2) }')
 
-if ! [ $distro == ubuntuq ]
+if ! [ $distro == ubuntu ]
   then
    echo -e "${red}Script isn't compatible with current Linux distribution!...exit${nocol}"
    exit 1
