@@ -22,7 +22,7 @@ sleep 2
 apt install ruby -y
 sleep 1
 
-echo -e "${cyan}Enter admin password for elasticsearch and kibana ${nocol}"
+echo -e "${cyan}Enter admin user password${nocol}"
 read -p ": " admin_pass
 
 echo -e "${cyan}Generating bcrypt hash for admin user...${nocol}"
