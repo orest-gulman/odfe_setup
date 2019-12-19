@@ -113,9 +113,11 @@ if [ $n == 20 ]
 fi  
   
   valhost=$(hostname)
+  ip=$(hostname -I | cut -d' ' -f1)
 
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
 echo -e "${cyan}Elasticsearch is running http://$valhost:9200${nocol}"
 echo -e "${cyan}admin user password: $admin_pass${nocol}"
 echo -e "${cyan}kibanaserver user password: $kibanaserver_pass${nocol}"
-echo -e "${cyan}elasticsearch user password: $kibanaserver_pass${nocol}"
+echo -e "${cyan}elasticsearch user password: $elasticsearch_pass${nocol}"
+echo -e "${cyan}Server IP address: $ip.${nocol}"
