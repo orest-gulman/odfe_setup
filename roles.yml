@@ -1,0 +1,21 @@
+---
+elasticsearch:
+  reserved: false
+  hidden: false
+  cluster_permissions:
+  - "cluster_monitor"
+  - "cluster_composite_ops"
+  - "indices:admin/template/get"
+  - "indices:admin/template/put"
+  - "cluster:admin/ingest/pipeline/put"
+  - "cluster:admin/ingest/pipeline/get"
+  index_permissions:
+  - index_patterns:
+    - "*"
+    allowed_actions:
+    - "crud"
+    - "create_index"
+  static: false
+_meta:
+  type: "roles"
+  config_version: 2
