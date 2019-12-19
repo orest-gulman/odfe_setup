@@ -59,7 +59,7 @@ echo $kibanaserver_hash
   
 echo -e "${cyan}Applying configuration...${nocol}"
 sleep 2
-  ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$kibanaserver_pass"
+  ruby ./config.rb "$admin_hash" "$kibanaserver_hash" "$elasticsearch_hash" "$kibanaserver_pass"
 echo -e "${cyan}internal_users.yml${nocol}"
   cat internal_users.yml
 sleep 2
