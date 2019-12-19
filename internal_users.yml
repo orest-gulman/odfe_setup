@@ -15,9 +15,9 @@ kibanaserver:
   reserved: true
   description: "kibanaserver user"
   
-logstash:
-  hash: "$2a$12$u1ShR4l4uBS3Uv59Pa2y5.1uQuZBrZtmNfqB3iM/.jL0XoV9sghS2"
+elasticsearch:
+  hash: "$2y$12$HUtgA7pKk.IDRFzqm4srUeGuiBmoyrAM6runGpjNiQu4vPjN7xYUi"
   reserved: false
   backend_roles:
-  - "logstash"
-  description: "logstash user"
+  - "elasticsearch"
+  description: "elasticsearch user"
