@@ -100,9 +100,9 @@ for ((n=0;n<20;n++))
     else
         echo -e "${cyan}Kibana is ready...${nocol}"
         sleep 2
-        #echo -e "${cyan}Importing saved data for winlogbeats...${nocol}"
-        #sleep 2
-        #curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@import-logs.ndjson -u admin:${admin_pass} -w "\n"
+        echo -e "${cyan}Importing saved data for winlogbeats...${nocol}"
+        sleep 2
+        curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@import-logs.ndjson -u admin:${admin_pass} -w "\n"
         echo -e "${cyan}Importing saved data for metricbeats...${nocol}"
         sleep 2
         curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@import-metrics.ndjson -u admin:${admin_pass} -w "\n"
