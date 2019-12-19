@@ -34,11 +34,19 @@ sleep 1
 
 echo -e "${cyan}Enter admin user password...${nocol}"
   read -p ": " admin_pass
+  
+echo -e "${cyan}Enter elasticsearch user password...${nocol}"
+  read -p ": " elasticsearch_pass
 
 echo -e "${cyan}Generating bcrypt hash for admin user...${nocol}"
 sleep 2
   admin_hash=$(htpasswd -bnBC 10 "" $admin_pass | tr -d ':\n')
 echo $admin_hash
+
+echo -e "${cyan}Generating bcrypt hash for elasticsearch user...${nocol}"
+sleep 2
+  elasticsearch_hash=$(htpasswd -bnBC 10 "" $elasticsearch_pass | tr -d ':\n')
+echo $elasticsearch_hash
 
 echo -e "${cyan}Generating password for kibanaserver user...${nocol}"
 sleep 2
