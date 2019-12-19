@@ -98,7 +98,7 @@ for ((n=0;n<20;n++))
         echo $response
         sleep 10
     else
-        echo -e "${cyan}Kibana up...${nocol}"
+        echo -e "${cyan}Kibana is ready...${nocol}"
         sleep 2
         #echo -e "${cyan}Importing saved data for winlogbeats...${nocol}"
         #sleep 2
