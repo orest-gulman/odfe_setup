@@ -98,8 +98,9 @@ for ((n=0;n<20;n++))
       then
         echo "$response"
         sleep 10
-    elif [ ${code[1]} == '200' ]
-      then
+    else
+    #elif [ ${code[1]} == '200' ]
+      #then
         echo "$response"
         echo -e "${cyan}Kibana is ready...${nocol}"
         sleep 2
