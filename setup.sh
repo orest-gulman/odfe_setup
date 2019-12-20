@@ -98,7 +98,9 @@ for ((n=0;n<20;n++))
     then
         echo $response
         sleep 10
-    else
+    elif [ ${code[1]} == 200 ]
+    then
+        echo $response
         echo -e "${cyan}Kibana is ready...${nocol}"
         sleep 2
         echo -e "${cyan}Importing saved data for winlogbeats...${nocol}"
