@@ -1,5 +1,6 @@
 #! /bin/bash
 cyan='\033[0;36m'
+green='\033[0;32m'
 red='\033[0;31m'
 nocol='\033[0m'
 
@@ -124,8 +125,8 @@ fi
   ip=$(hostname -I | cut -d' ' -f1)
 
 echo -e "${cyan}Kibana is running http://$valhost:5601${nocol}"
-echo -e "${cyan}Elasticsearch is running http://$valhost:9200${nocol}"
-echo -e "${cyan}admin user password: $admin_pass${nocol}"
+echo -e "${green}Elasticsearch is running http://$valhost:9200${nocol}"
+echo -e "${green}admin user password: $admin_pass${nocol}"
 echo -e "${cyan}kibanaserver user password: $kibanaserver_pass${nocol}"
 echo -e "${cyan}elasticsearch user password: $elasticsearch_pass${nocol}"
 echo -e "${cyan}Server IP address: $ip.${nocol}"
