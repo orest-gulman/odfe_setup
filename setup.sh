@@ -95,12 +95,12 @@ for ((n=0;n<20;n++))
     response=$(curl -s -XGET http://localhost:5601/status -I -u admin:$admin_pass|grep "HTTP/1.1")
     code=($response)
     if ! [ ${code[1]} == '200' ]
-    then
-        echo $response
+      then
+        echo "$response"
         sleep 10
     elif [ ${code[1]} == '200' ]
-    then
-        echo $response
+      then
+        echo "$response"
         echo -e "${cyan}Kibana is ready...${nocol}"
         sleep 2
         echo -e "${cyan}Importing saved data for winlogbeats...${nocol}"
