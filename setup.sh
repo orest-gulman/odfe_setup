@@ -15,21 +15,21 @@ if ! [ $distro == ubuntu ]
 fi
 
 echo -e "${cyan}Installing docker... ${nocol}"
-sleep 2
+sleep 3
   curl -fsSL https://get.docker.com -o get-docker.sh
   sh get-docker.sh
 sleep 1
   
 echo -e "${cyan}Installing docker-compose... ${nocol}"
-sleep 2
+sleep 3
   apt install docker-compose -y
 sleep 1
 echo -e "${cyan}Installing apache2-utils... ${nocol}"
-sleep 2
+sleep 3
   apt install apache2-utils -y
 sleep 1
 echo -e "${cyan}Installing ruby... ${nocol}"
-sleep 2
+sleep 3
   apt install ruby -y
 sleep 1
 
