@@ -94,11 +94,11 @@ for ((n=0;n<20;n++))
     do
     response=$(curl -s -XGET http://localhost:5601/status -I -u admin:$admin_pass|grep "HTTP/1.1")
     code=($response)
-    if ! [ ${code[1]} == 200 ]
+    if ! [ ${code[1]} == '200' ]
     then
         echo $response
         sleep 10
-    elif [ ${code[1]} == 200 ]
+    elif [ ${code[1]} == '200' ]
     then
         echo $response
         echo -e "${cyan}Kibana is ready...${nocol}"
