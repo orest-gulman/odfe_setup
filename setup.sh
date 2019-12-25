@@ -10,8 +10,6 @@ if ! [ $distro == ubuntu ]
   then
    echo -e "${red}Script isn't compatible with current Linux distribution!...exit${nocol}"
    exit 1
-  else
-    continue
 fi
 
 echo -e "${cyan}Installing docker... ${nocol}"
